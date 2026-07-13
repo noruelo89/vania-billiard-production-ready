@@ -1,5 +1,5 @@
 export type LeadSegment = "home" | "business" | "venue" | "accessories";
-export type LeadSource = "organic" | "social" | "paid" | "direct" | "referral" | "unknown";
+export type LeadSource = "organic" | "social" | "paid" | "direct" | "referral" | "website" | "website-tool" | "unknown";
 
 export type LeadStatus =
   | "Captured"

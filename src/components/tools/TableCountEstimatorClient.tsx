@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
+import { LeadCapturePanel } from "@/components/leads/LeadCapturePanel";
 import { ResultPanel } from "@/components/ui/ResultPanel";
 import { type TableSize } from "@/config/tools";
 import { estimateTableCount } from "@/lib/room-tools";
@@ -83,13 +84,21 @@ export function TableCountEstimatorClient() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button href={waConsultationLink()} external variant="whatsapp">
-            Konsultasi Rencana Usaha
+          <Button href={waConsultationLink()} external variant="secondary">
+            WhatsApp Tanpa Kode
           </Button>
           <Button href="/buka-usaha-billiard" variant="secondary">
             Baca Panduan Usaha
           </Button>
         </div>
+
+        <LeadCapturePanel
+          segment="business"
+          roomSize={`${lengthM} x ${widthM} m`}
+          tableCount={`${result.estimatedCount}`}
+          productInterest={`Meja ${tableSize}`}
+          title="Simpan estimasi usaha dan lanjut konsultasi"
+        />
       </div>
     </div>
   );

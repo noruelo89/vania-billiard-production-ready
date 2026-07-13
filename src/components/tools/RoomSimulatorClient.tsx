@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
+import { LeadCapturePanel } from "@/components/leads/LeadCapturePanel";
 import { ResultPanel } from "@/components/ui/ResultPanel";
 import { simulatorAssumptions, type TableSize } from "@/config/tools";
 import { simulateRoom } from "@/lib/room-tools";
@@ -111,13 +112,19 @@ export function RoomSimulatorClient() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Button href={waSimulatorLink({ length: lengthM, width: widthM, size: tableSize })} external variant="whatsapp">
-            Konsultasi Hasil Ini
+          <Button href={waSimulatorLink({ length: lengthM, width: widthM, size: tableSize })} external variant="secondary">
+            WhatsApp Tanpa Kode
           </Button>
           <Button href="/meja-billiard" variant="secondary">
             Lihat Produk Relevan
           </Button>
         </div>
+
+        <LeadCapturePanel
+          segment="home"
+          roomSize={`${lengthM} x ${widthM} m`}
+          productInterest={`Meja ${tableSize}`}
+        />
       </div>
     </div>
   );
