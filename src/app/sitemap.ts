@@ -1,22 +1,12 @@
 import type { MetadataRoute } from "next";
 import { publicSiteUrl, shouldIndex } from "@/config/site";
+import { products } from "@/data/products";
 
-const plannedRoutes = [
+const implementedRoutes = [
   "/",
   "/meja-billiard",
-  "/untuk-rumah",
-  "/untuk-usaha",
-  "/buka-usaha-billiard",
   "/simulator-ruangan",
   "/hitung-kebutuhan-usaha",
-  "/aksesoris",
-  "/galeri",
-  "/artikel",
-  "/tentang",
-  "/informasi-faq",
-  "/kontak",
-  "/kebijakan-privasi",
-  "/syarat-ketentuan",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -25,12 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   const lastModified = new Date();
+  const productRoutes = products.map((product) => `/meja-billiard/${product.slug}`);
+  const routes = [...implementedRoutes, ...productRoutes];
 
-  // Keep this route list synchronized as pages are implemented.
-  return plannedRoutes.map((route) => ({
+  return routes.map((route) => ({
     url: new URL(route, publicSiteUrl).toString(),
     lastModified,
     changeFrequency: route === "/" ? "weekly" : "monthly",
-    priority: route === "/" ? 1 : 0.7,
+    priority: route === "/" ? 1 : route === "/meja-billiard" ? 0.8 : 0.7,
   }));
 }
