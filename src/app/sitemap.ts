@@ -9,6 +9,7 @@ const implementedRoutes = [
   "/meja-billiard",
   "/simulator-ruangan",
   "/hitung-kebutuhan-usaha",
+  "/estimasi-modal-usaha",
   "/aksesoris",
   "/artikel",
   "/galeri",
