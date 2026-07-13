@@ -9,6 +9,15 @@ const implementedRoutes = [
   "/simulator-ruangan",
   "/hitung-kebutuhan-usaha",
   "/aksesoris",
+  "/galeri",
+  "/tentang",
+  "/informasi-faq",
+  "/kontak",
+  "/kebijakan-privasi",
+  "/syarat-ketentuan",
+  "/untuk-rumah",
+  "/untuk-usaha",
+  "/buka-usaha-billiard",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
