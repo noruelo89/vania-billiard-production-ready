@@ -18,15 +18,16 @@ const tools = [
   {
     title: "Estimasi Modal",
     description: "Kisaran komponen modal untuk meja, aksesoris, pengiriman, pemasangan, dan renovasi ringan.",
-    href: "/buka-usaha-billiard",
+    href: "/estimasi-modal-usaha",
     status: "MVP-plus",
   },
 ];
 
 export function ToolsOverview() {
   return (
-    <section className="bg-bg px-5 py-20 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden bg-bg px-5 py-20 lg:px-8 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 grid-felt opacity-25" />
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Decision tools"
           title="Hitung dulu sebelum memilih meja."
@@ -35,8 +36,8 @@ export function ToolsOverview() {
         <div className="grid gap-5 lg:grid-cols-3">
           {tools.map((tool, index) => (
             <Reveal key={tool.title} delay={index * 100}>
-              <article className="flex h-full flex-col border border-border-subtle bg-surface p-6">
-                <p className="mb-5 w-fit border border-copper/30 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-copper">
+              <article className="card-luxury flex h-full flex-col p-6 transition-transform duration-300 hover:-translate-y-1">
+                <p className="mb-5 w-fit border border-copper/30 bg-copper/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-copper">
                   {tool.status}
                 </p>
                 <h3 className="font-serif text-3xl font-semibold text-text">{tool.title}</h3>

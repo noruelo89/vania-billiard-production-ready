@@ -4,6 +4,7 @@ import { FloatingWA } from "@/components/layout/FloatingWA";
 import { MobileStickyCTA } from "@/components/layout/MobileStickyCTA";
 import { Hero } from "@/components/sections/Hero";
 import { NeedSelector } from "@/components/sections/NeedSelector";
+import { TrustTicker } from "@/components/sections/TrustTicker";
 import { QuickAssessment } from "@/components/sections/QuickAssessment";
 import { ToolsOverview } from "@/components/sections/ToolsOverview";
 import { FeaturedTables } from "@/components/sections/FeaturedTables";
@@ -21,6 +22,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <TrustTicker />
         <NeedSelector />
         <QuickAssessment />
         <ToolsOverview />

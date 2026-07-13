@@ -31,8 +31,9 @@ const needs = [
 
 export function NeedSelector() {
   return (
-    <section className="bg-bg px-5 py-20 lg:px-8 lg:py-28">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden bg-bg px-5 py-20 lg:px-8 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 dot-matrix opacity-20" />
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Pilih kebutuhan"
           title="Mulai dari situasi yang paling dekat dengan rencana Anda."
@@ -41,8 +42,8 @@ export function NeedSelector() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {needs.map((need, index) => (
             <Reveal key={need.title} delay={index * 90}>
-              <article className="group flex h-full flex-col border border-border-subtle bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-2xl hover:shadow-copper/10">
-                <p className="mb-5 font-mono text-xs text-copper">0{index + 1}</p>
+              <article className="group cue-line flex h-full flex-col border border-border-subtle bg-surface/90 p-5 pl-7 transition-all duration-300 hover:-translate-y-1 hover:border-copper/50 hover:shadow-2xl hover:shadow-copper/10">
+                <p className="mb-5 w-fit border border-copper/25 px-2 py-1 font-mono text-[10px] text-copper">0{index + 1}</p>
                 <h3 className="font-serif text-2xl font-semibold text-text">{need.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-text-muted">{need.description}</p>
                 <Button href={need.href} variant="ghost" size="sm" className="mt-6 justify-start px-0 text-copper">
