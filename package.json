@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build --webpack",
+    "start": "next start",
+    "typecheck": "node scripts/typecheck.mjs",
+    "lint": "node scripts/lint.mjs",
+    "test": "node scripts/test.mjs"
   },
   "dependencies": {
     "next": "16.2.9",

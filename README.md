@@ -53,6 +53,9 @@ public/
 ```bash
 npm install
 npm run dev          # http://localhost:3000
+npm run lint         # Baseline project lint checks
+npm run typecheck    # TypeScript validation
+npm run test         # Baseline foundation tests
 npm run build        # Production build
 npm start            # Run production build
 ```
@@ -71,14 +74,24 @@ All product, workshop, gallery, and article photos are AI-generated using [Polli
 
 Both numbers are pre-filled in the Floating WhatsApp component.
 
+## PRD v3.1 Planning Docs
+
+This repo is currently a v1.2 visual homepage preview. The PRD v3.1 rebuild plan and current-state audit live in:
+
+- `docs/development-plan-v4.md` — phase-by-phase implementation plan aligned to PRD FINAL v3.1.
+- `docs/current-progress-audit.md` — gap audit of the current repo vs PRD FINAL v3.1.
+
 ## Roadmap
 
-- [ ] Phase 3-7: /meja-billiard, /meja-billiard/[slug], /aksesoris, /simulator, /galeri, /artikel, /artikel/[slug], /tentang, /kontak, /faq
-- [ ] Real product photography
-- [ ] Room simulator interactive page
-- [ ] Article detail pages
-- [ ] ERP sync for product catalog (Phase 8)
-- [ ] EN/ID bilingual
+- [ ] Phase 0: product data, lead flow, simulator assumptions, and claims readiness reset
+- [ ] Phase 1: centralized config, typed models, environment-aware SEO, scripts, sitemap, robots
+- [ ] Phase 2: design system, navigation, WhatsApp chooser, form components, result panels
+- [ ] Phase 3: homepage rebuild to PRD v3.1 section order
+- [ ] Phase 4: `/simulator-ruangan` and `/hitung-kebutuhan-usaha`
+- [ ] Phase 5: `/meja-billiard` catalog and `/meja-billiard/[slug]` pages
+- [ ] Phase 6: lead capture, lead ID, attribution, database/API, WhatsApp handoff
+- [ ] Phase 7: accessories hub and marketplace tracking
+- [ ] Phase 8-12: trust pages, articles/SEO, QA/security/analytics, staging, production launch
 
 ---
 
