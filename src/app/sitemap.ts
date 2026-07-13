@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { publicSiteUrl, shouldIndex } from "@/config/site";
+import { accessories } from "@/data/accessories";
 import { products } from "@/data/products";
 
 const implementedRoutes = [
@@ -7,6 +8,7 @@ const implementedRoutes = [
   "/meja-billiard",
   "/simulator-ruangan",
   "/hitung-kebutuhan-usaha",
+  "/aksesoris",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,7 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const lastModified = new Date();
   const productRoutes = products.map((product) => `/meja-billiard/${product.slug}`);
-  const routes = [...implementedRoutes, ...productRoutes];
+  const accessoryRoutes = accessories.map((accessory) => `/aksesoris/${accessory.slug}`);
+  const routes = [...implementedRoutes, ...productRoutes, ...accessoryRoutes];
 
   return routes.map((route) => ({
     url: new URL(route, publicSiteUrl).toString(),
