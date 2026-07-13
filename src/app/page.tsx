@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWA } from "@/components/layout/FloatingWA";
+import { MobileStickyCTA } from "@/components/layout/MobileStickyCTA";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBadges } from "@/components/sections/TrustBadges";
 import { BigQuote } from "@/components/sections/BigQuote";
@@ -35,6 +36,7 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      <MobileStickyCTA />
       <FloatingWA />
     </>
   );

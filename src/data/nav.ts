@@ -1,4 +1,4 @@
-// Navigation config — PRD v1.0 Section 11
+import { businessConfig } from "@/config/business";
 
 export interface NavItem {
   label: string;
@@ -9,61 +9,65 @@ export interface NavItem {
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Meja Billiard", href: "/meja-billiard" },
+  { label: "Untuk Rumah", href: "/untuk-rumah" },
+  { label: "Untuk Usaha", href: "/untuk-usaha" },
+  { label: "Simulator", href: "/simulator-ruangan" },
   { label: "Aksesoris", href: "/aksesoris" },
-  { label: "Simulator Ruangan", href: "/simulator" },
-  { label: "Galeri", href: "/galeri" },
   { label: "Artikel", href: "/artikel" },
-  { label: "Tentang Kami", href: "/tentang" },
+  { label: "Tentang", href: "/tentang" },
   { label: "Kontak", href: "/kontak" },
 ];
 
 export const mobileNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Meja", href: "/meja-billiard" },
+  { label: "Usaha", href: "/untuk-usaha" },
+  { label: "Simulator", href: "/simulator-ruangan" },
   { label: "Aksesoris", href: "/aksesoris" },
-  { label: "Simulator", href: "/simulator" },
-  { label: "Galeri", href: "/galeri" },
-  { label: "Artikel", href: "/artikel" },
-  { label: "Tentang", href: "/tentang" },
   { label: "Kontak", href: "/kontak" },
 ];
 
 export const footerNav = {
   produk: [
-    { label: "Meja 7ft", href: "/meja-billiard/meja-7ft" },
-    { label: "Meja 8ft", href: "/meja-billiard/meja-8ft" },
+    { label: "Meja 7ft", href: "/meja-billiard/meja-billiard-7ft" },
+    { label: "Meja 8ft", href: "/meja-billiard/meja-billiard-8ft" },
     { label: "Abimanyu Gen 2", href: "/meja-billiard/abimanyu-gen-2" },
     { label: "Abimanyu Gen 5 Pro", href: "/meja-billiard/abimanyu-gen-5-pro" },
     { label: "Abimanyu Prime", href: "/meja-billiard/abimanyu-prime" },
-    { label: "Custom Order", href: "/meja-billiard/custom" },
-    { label: "Kain Laken", href: "/aksesoris/kain-laken" },
+    { label: "Custom", href: "/meja-billiard/custom" },
+    { label: "Kain Laken", href: "/aksesoris/laken" },
     { label: "Stick Billiard", href: "/aksesoris/stick" },
   ],
   informasi: [
-    { label: "Simulator Ruangan", href: "/simulator" },
+    { label: "Untuk Rumah", href: "/untuk-rumah" },
+    { label: "Untuk Usaha", href: "/untuk-usaha" },
+    { label: "Buka Usaha Billiard", href: "/buka-usaha-billiard" },
+    { label: "Simulator Ruangan", href: "/simulator-ruangan" },
+    { label: "Hitung Kebutuhan Usaha", href: "/hitung-kebutuhan-usaha" },
     { label: "Galeri", href: "/galeri" },
-    { label: "Artikel & Panduan", href: "/artikel" },
-    { label: "Tentang Kami", href: "/tentang" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Sitemap", href: "/sitemap.xml" },
+    { label: "Artikel", href: "/artikel" },
+    { label: "FAQ", href: "/informasi-faq" },
   ],
   bantuan: [
-    { label: "Konsultasi Meja", href: "https://wa.me/6282241545326" },
-    { label: "Konsultasi Aksesoris", href: "https://wa.me/6285182306565" },
+    { label: "Konsultasi Meja", href: `https://wa.me/${businessConfig.whatsapp.table.number}` },
+    { label: "Tanya Aksesoris", href: `https://wa.me/${businessConfig.whatsapp.accessories.number}` },
     { label: "Kontak", href: "/kontak" },
-    { label: "Kebijakan Privasi", href: "/privacy" },
-    { label: "Syarat & Ketentuan", href: "/terms" },
+    { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
+    { label: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
   ],
 };
 
-// Marketplace + social — PRD Section 10
 export const marketplaceLinks = [
-  { label: "Shopee", href: "https://shopee.co.id/vaniabilliard", icon: "shopee" },
-  { label: "TikTok Shop", href: "#", icon: "tiktok" }, // placeholder
-  { label: "Other Store", href: "https://tr.ee/wyOXUkTWfc", icon: "link" },
+  { label: "Shopee", href: businessConfig.marketplace.shopee, icon: "shopee" },
+  { label: "TikTok Shop", href: businessConfig.marketplace.tiktokShop, icon: "tiktok" },
+  { label: "Marketplace Lain", href: businessConfig.marketplace.other, icon: "link" },
 ] as const;
-// Real social icons (SVG paths) — needed for footer
-export const socialLinks: { label: string; href: string; icon: "instagram" | "tiktok" | "facebook" | "youtube" }[] = [
+
+export const socialLinks: {
+  label: string;
+  href: string;
+  icon: "instagram" | "tiktok" | "facebook" | "youtube";
+}[] = [
   { label: "Instagram", href: "https://instagram.com/vaniabilliard", icon: "instagram" },
   { label: "TikTok", href: "https://tiktok.com/@vaniabilliard", icon: "tiktok" },
   { label: "Facebook", href: "https://facebook.com/vaniabilliard", icon: "facebook" },

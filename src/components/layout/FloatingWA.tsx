@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { WA } from "@/lib/whatsapp";
+import { WA, waAccessoriesLink, waConsultationLink } from "@/lib/whatsapp";
 
 export function FloatingWA() {
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ export function FloatingWA() {
             </div>
             <div className="p-2">
               <a
-                href={`https://wa.me/${WA.meja}?text=Halo%20Vania%20Billiard%2C%20saya%20ingin%20konsultasi%20meja%20billiard`}
+                href={waConsultationLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 p-3 hover:bg-surface transition-colors"
@@ -62,7 +62,7 @@ export function FloatingWA() {
                 </div>
               </a>
               <a
-                href={`https://wa.me/${WA.aksesoris}?text=Halo%20Vania%20Billiard%2C%20saya%20ingin%20tanya%20aksesoris%20billiard`}
+                href={waAccessoriesLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 p-3 hover:bg-surface transition-colors"
