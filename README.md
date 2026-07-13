@@ -79,7 +79,8 @@ Both numbers are pre-filled in the Floating WhatsApp component.
 This repo is currently a v1.2 visual homepage preview. The PRD v3.1 rebuild plan and current-state audit live in:
 
 - `docs/development-plan-v4.md` — phase-by-phase implementation plan aligned to PRD FINAL v3.1.
-- `docs/current-progress-audit.md` — gap audit of the current repo vs PRD FINAL v3.1.
+- `docs/current-progress-audit.md` — gap audit between current repo and PRD v3.1.
+- `docs/qa-security-launch-checklist.md` — Phase 11 QA, security, analytics, and launch checklist.
 
 ## Roadmap
 
