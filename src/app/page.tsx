@@ -3,13 +3,12 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingWA } from "@/components/layout/FloatingWA";
 import { MobileStickyCTA } from "@/components/layout/MobileStickyCTA";
 import { Hero } from "@/components/sections/Hero";
-import { TrustBadges } from "@/components/sections/TrustBadges";
-import { BigQuote } from "@/components/sections/BigQuote";
+import { NeedSelector } from "@/components/sections/NeedSelector";
+import { QuickAssessment } from "@/components/sections/QuickAssessment";
+import { ToolsOverview } from "@/components/sections/ToolsOverview";
 import { FeaturedTables } from "@/components/sections/FeaturedTables";
-import { TableSelectionGuide } from "@/components/sections/TableSelectionGuide";
-import { SimulatorTeaser } from "@/components/sections/SimulatorTeaser";
-import { AccessoriesCategories } from "@/components/sections/AccessoriesCategories";
 import { WhyChooseVania } from "@/components/sections/WhyChooseVania";
+import { AccessoriesCategories } from "@/components/sections/AccessoriesCategories";
 import { GalleryPreview } from "@/components/sections/GalleryPreview";
 import { ShippingProof } from "@/components/sections/ShippingProof";
 import { ArticlesPreview } from "@/components/sections/ArticlesPreview";
@@ -22,13 +21,12 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <TrustBadges />
-        <BigQuote />
+        <NeedSelector />
+        <QuickAssessment />
+        <ToolsOverview />
         <FeaturedTables />
-        <TableSelectionGuide />
-        <SimulatorTeaser />
-        <AccessoriesCategories />
         <WhyChooseVania />
+        <AccessoriesCategories />
         <GalleryPreview />
         <ShippingProof />
         <ArticlesPreview />
