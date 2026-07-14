@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db-products';
+import { isAdminAuthenticated } from '../../../lib/admin-auth';
 import { clientIp, isRateLimited } from '../../../lib/rate-limit';
 
 const fallbackLeads: Array<Record<string, unknown>> = [];
@@ -63,6 +64,9 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  if (!(await isAdminAuthenticated())) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   if (process.env.DATABASE_URL) {
     try {
       const leads = await prisma.lead.findMany({ orderBy: { createdAt: 'desc' }, take: 50 });
