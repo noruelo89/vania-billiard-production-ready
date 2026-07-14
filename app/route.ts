@@ -1,7 +1,9 @@
+import { getProducts } from '../lib/db-products';
 import { htmlResponse, renderLegacyPage } from '../lib/legacy-render';
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
-export function GET() {
-  return htmlResponse(renderLegacyPage('index.php'));
+export async function GET() {
+  const products = await getProducts();
+  return htmlResponse(renderLegacyPage('index.php', products));
 }

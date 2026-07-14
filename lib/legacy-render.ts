@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { products, rupiah } from './legacy-data';
+import { products as fallbackProducts, rupiah, type Product } from './legacy-data';
 
 const root = process.cwd();
 
-function productCard(product: (typeof products)[number], index = 0, variant: 'home' | 'catalog' = 'catalog') {
+function productCard(product: Product, index = 0, variant: 'home' | 'catalog' = 'catalog') {
   if (variant === 'home') {
     const direction = index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse';
     const colorButtons = product.nama_kategori.toLowerCase().includes('meja') ? `
@@ -77,7 +77,7 @@ function common(html: string) {
     .replace(/detail\.php\?id=/g, '/detail?id=');
 }
 
-function replaceProductLoop(html: string, file: string, count?: number) {
+function replaceProductLoop(html: string, file: string, products: Product[], count?: number) {
   const cards = products
     .slice(0, count)
     .map((product, index) => productCard(product, index, file === 'index.php' ? 'home' : 'catalog'))
@@ -90,16 +90,15 @@ function replaceProductLoop(html: string, file: string, count?: number) {
     .replace(/<\?php\s+foreach \(\$products as \$product\): \?>[\s\S]*?<\?php\s+endforeach;\s+\?>/g, options);
 }
 
-export function renderLegacyPage(file: string) {
+export function renderLegacyPage(file: string, products: Product[] = fallbackProducts) {
   let html = fs.readFileSync(path.join(root, 'legacy-source', file), 'utf8');
-  html = replaceProductLoop(html, file, file === 'index.php' ? 4 : undefined);
+  html = replaceProductLoop(html, file, products, file === 'index.php' ? 4 : undefined);
   html = stripPhp(html);
   html = common(html);
   return html;
 }
 
-export function renderDetail(idParam?: string | null) {
-  const product = products.find(p => p.id === Number(idParam || 1)) || products[0];
+export function renderDetail(product: Product) {
   let html = fs.readFileSync(path.join(root, 'legacy-source', 'detail.php'), 'utf8');
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(product.nama_produk)} | Vania Billiard</title>`);
   html = html.replace(/<meta name="description"[\s\S]*?>/, `<meta name="description" content="${escapeHtml(product.deskripsi.slice(0, 150))}...">`);
