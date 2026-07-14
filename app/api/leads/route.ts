@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db-products';
+import { clientIp, isRateLimited } from '../../../lib/rate-limit';
 
 const fallbackLeads: Array<Record<string, unknown>> = [];
 
@@ -19,9 +20,20 @@ function htmlThanks() {
 }
 
 export async function POST(request: Request) {
+  const accept = request.headers.get('accept') || '';
+  const ip = clientIp(request);
+  if (isRateLimited(`lead:${ip}`, 6, 10 * 60 * 1000)) {
+    if (accept.includes('text/html')) return htmlThanks();
+    return NextResponse.json({ ok: false, error: 'Terlalu banyak request. Coba lagi sebentar.' }, { status: 429 });
+  }
+
   const form = await request.formData();
   const rawLead = Object.fromEntries([...form.entries()].map(([key, value]) => [key, String(value)]));
-  const accept = request.headers.get('accept') || '';
+  const honeypot = firstValue(form, ['website', 'url', 'company_site']);
+  if (honeypot) {
+    if (accept.includes('text/html')) return htmlThanks();
+    return NextResponse.json({ ok: true, skipped: true });
+  }
 
   const lead = {
     name: firstValue(form, ['nama', 'name', 'nama_pelanggan']) || 'Tanpa Nama',
@@ -32,7 +44,7 @@ export async function POST(request: Request) {
     businessName: firstValue(form, ['nama_bisnis', 'businessName', 'company']) || null,
     quantity: firstValue(form, ['jumlah', 'quantity', 'qty']) || null,
     message: firstValue(form, ['pesan', 'message', 'catatan']) || null,
-    source: 'website',
+    source: firstValue(form, ['source']) || 'website',
   };
 
   try {

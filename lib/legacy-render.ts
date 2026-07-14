@@ -72,6 +72,7 @@ function common(html: string) {
     .replaceAll('href="b2b.php"', 'href="/b2b"')
     .replaceAll('href="index-tech.php"', 'href="/index-tech"')
     .replaceAll('action="submit_lead.php"', 'action="/api/leads"')
+    .replaceAll('<button type="submit"', '<input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true"><button type="submit"')
     .replaceAll('src="lang.js"', 'src="/lang.js"')
     .replaceAll("src='lang.js'", "src='/lang.js'")
     .replace(/detail\.php\?id=/g, '/detail?id=');
@@ -106,6 +107,7 @@ function enhanceSimulatorLeadFlow(html: string) {
                             <input name="nama" required placeholder="Nama" class="w-full text-xs p-2 bg-white dark:bg-[#111] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
                             <input name="nomor_wa" required placeholder="Nomor WhatsApp" class="w-full text-xs p-2 bg-white dark:bg-[#111] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
                             <input name="kota" placeholder="Kota" class="w-full text-xs p-2 bg-white dark:bg-[#111] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
                             <input type="hidden" name="source" value="simulator">
                             <input type="hidden" name="minat_produk" value="Room Planner Simulator">
                             <textarea name="pesan" id="sim-lead-summary" class="hidden"></textarea>
