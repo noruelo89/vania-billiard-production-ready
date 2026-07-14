@@ -114,7 +114,7 @@ function enhanceSimulatorLeadFlow(html: string) {
                         </form>
                     </div>`;
   html = html.replace(/\s*<\/aside>/, `${leadPanel}\n        </aside>`);
-  return html.replace('</script>', `
+  return html.replace('</body>', `<script>
         function collectSimulatorSummary() {
             const roomW = document.getElementById('room-width')?.value || '-';
             const roomH = document.getElementById('room-height')?.value || '-';
@@ -137,7 +137,7 @@ function enhanceSimulatorLeadFlow(html: string) {
             status.textContent = response.ok ? 'Layout terkirim. Tim Vania akan follow up.' : 'Gagal mengirim layout, coba lagi.';
             if (response.ok) event.target.reset();
         });
-    </script>`);
+    </script></body>`);
 }
 
 export function renderDetail(product: Product) {
