@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db-products';
 import { isAdminAuthenticated } from '../../../lib/admin-auth';
+import { notifyNewLead } from '../../../lib/lead-notifications';
 import { clientIp, isRateLimited } from '../../../lib/rate-limit';
 
 const fallbackLeads: Array<Record<string, unknown>> = [];
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
   try {
     if (process.env.DATABASE_URL) {
       const saved = await prisma.lead.create({ data: lead });
+      await notifyNewLead(saved);
       if (accept.includes('text/html')) return htmlThanks();
       return NextResponse.json({ ok: true, lead: saved });
     }
@@ -58,7 +60,9 @@ export async function POST(request: Request) {
     console.warn('Lead database save failed, using in-memory fallback:', error);
   }
 
-  fallbackLeads.push({ ...rawLead, ...lead, createdAt: new Date().toISOString() });
+  const fallbackLead = { ...rawLead, ...lead, createdAt: new Date().toISOString() };
+  fallbackLeads.push(fallbackLead);
+  await notifyNewLead(fallbackLead);
   if (accept.includes('text/html')) return htmlThanks();
   return NextResponse.json({ ok: true, lead });
 }
