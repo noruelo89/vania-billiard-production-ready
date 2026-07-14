@@ -95,7 +95,49 @@ export function renderLegacyPage(file: string, products: Product[] = fallbackPro
   html = replaceProductLoop(html, file, products, file === 'index.php' ? 4 : undefined);
   html = stripPhp(html);
   html = common(html);
+  if (file === 'simulator.php') html = enhanceSimulatorLeadFlow(html);
   return html;
+}
+
+function enhanceSimulatorLeadFlow(html: string) {
+  const leadPanel = `<div class="mt-4 p-4 border border-luxury-copper/30 bg-luxury-copper/10 rounded">
+                        <p class="text-[9px] uppercase tracking-widest mb-3 text-luxury-copper font-bold">Kirim Layout ke Konsultan</p>
+                        <form id="sim-lead-form" class="space-y-2">
+                            <input name="nama" required placeholder="Nama" class="w-full text-xs p-2 bg-white dark:bg-[#111] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
+                            <input name="nomor_wa" required placeholder="Nomor WhatsApp" class="w-full text-xs p-2 bg-white dark:bg-[#111] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
+                            <input name="kota" placeholder="Kota" class="w-full text-xs p-2 bg-white dark:bg-[#111] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
+                            <input type="hidden" name="source" value="simulator">
+                            <input type="hidden" name="minat_produk" value="Room Planner Simulator">
+                            <textarea name="pesan" id="sim-lead-summary" class="hidden"></textarea>
+                            <button class="w-full bg-luxury-copper text-white text-[10px] font-bold uppercase tracking-widest py-2 hover:bg-[#b05929] transition-all">Kirim Layout</button>
+                            <p id="sim-lead-status" class="text-[10px] text-gray-500"></p>
+                        </form>
+                    </div>`;
+  html = html.replace('</div>\n                </div>\n            </div>\n        </aside>', `${leadPanel}\n                </div>\n                </div>\n            </div>\n        </aside>`);
+  return html.replace('</script>', `
+        function collectSimulatorSummary() {
+            const roomW = document.getElementById('room-width')?.value || '-';
+            const roomH = document.getElementById('room-height')?.value || '-';
+            const inv = document.getElementById('inv-count')?.innerText || '0 Unit';
+            const price = document.getElementById('live-price')?.innerText || 'Rp 0';
+            const objects = [...document.querySelectorAll('.sim-object')].map((el, index) => {
+                const label = el.querySelector('.label-text')?.innerText || el.innerText.trim().split('\\n')[0] || 'Objek';
+                return (index + 1) + '. ' + label + ' @ ' + Math.round(parseFloat(el.style.left || '0')) + ',' + Math.round(parseFloat(el.style.top || '0'));
+            }).join(' | ');
+            return 'Simulator layout: Ruang ' + roomW + 'm x ' + roomH + 'm. Inventory ' + inv + '. Estimasi ' + price + '. Objek: ' + (objects || 'Belum ada objek.');
+        }
+        document.addEventListener('submit', async function(event) {
+            if (event.target?.id !== 'sim-lead-form') return;
+            event.preventDefault();
+            const status = document.getElementById('sim-lead-status');
+            const summary = document.getElementById('sim-lead-summary');
+            summary.value = collectSimulatorSummary();
+            status.textContent = 'Mengirim layout...';
+            const response = await fetch('/api/leads', { method: 'POST', body: new FormData(event.target) });
+            status.textContent = response.ok ? 'Layout terkirim. Tim Vania akan follow up.' : 'Gagal mengirim layout, coba lagi.';
+            if (response.ok) event.target.reset();
+        });
+    </script>`);
 }
 
 export function renderDetail(product: Product) {
