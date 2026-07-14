@@ -113,7 +113,7 @@ function enhanceSimulatorLeadFlow(html: string) {
                             <p id="sim-lead-status" class="text-[10px] text-gray-500"></p>
                         </form>
                     </div>`;
-  html = html.replace('</div>\n                </div>\n            </div>\n        </aside>', `${leadPanel}\n                </div>\n                </div>\n            </div>\n        </aside>`);
+  html = html.replace(/\s*<\/aside>/, `${leadPanel}\n        </aside>`);
   return html.replace('</script>', `
         function collectSimulatorSummary() {
             const roomW = document.getElementById('room-width')?.value || '-';
